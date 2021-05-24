@@ -24,7 +24,31 @@ const Layout: React.FC<RouteConfigComponentProps> = React.memo(function Layout(p
   // const history = useHistory()
   const { route } = props
   console.log('hybird layout')
-  return renderRoutes(route?.routes)
+  return (
+    <div
+      style={{
+        height: '100vh'
+      }}
+    >
+      <div
+        style={{
+          height: 200,
+          background: 'gray'
+        }}
+      >
+        hybird-header
+      </div>
+      <div
+        style={{
+          height: 'calc(100vh - 200px)',
+          overflow: 'auto',
+          position: 'relative'
+        }}
+      >
+        {renderRoutes(route?.routes)}
+      </div>
+    </div>
+  )
 })
 
 export const H5Layout: React.FC<RouteConfigComponentProps> = React.memo(function H5Layout(props) {
@@ -33,7 +57,12 @@ export const H5Layout: React.FC<RouteConfigComponentProps> = React.memo(function
   // TODO 判断是否是微信环境，跳转到错误提示页
   // history.push('/wx-page-error')
   console.log('h5 layout')
-  return <>{renderRoutes(route?.routes)}</>
+  return (
+    <>
+      <h1>h5</h1>
+      {renderRoutes(route?.routes)}
+    </>
+  )
 })
 
 export default Layout

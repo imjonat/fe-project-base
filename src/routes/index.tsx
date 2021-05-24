@@ -2,6 +2,21 @@ import loadable from '@loadable/component'
 import Layout, { H5Layout } from '@/layouts'
 import { RouteConfig } from 'react-router-config'
 import Home from '@/pages/home'
+import React from 'react'
+import styled from 'styled-components'
+
+const StyledCenter = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+`
+export const Loading = () => {
+  return <StyledCenter>loading</StyledCenter>
+}
 
 const routesConfig: RouteConfig[] = [
   {
@@ -16,9 +31,11 @@ const routesConfig: RouteConfig[] = [
     component: Layout,
     routes: [
       {
-        path: '/',
+        path: '/aaa',
         exact: false,
-        component: loadable(() => import('@/pages/hybird'))
+        component: loadable(() => import('@/pages/hybird'), {
+          fallback: <Loading />
+        })
       }
     ]
   },
@@ -31,7 +48,9 @@ const routesConfig: RouteConfig[] = [
       {
         path: '/',
         exact: false,
-        component: loadable(() => import('@/pages/h5'))
+        component: loadable(() => import('@/pages/h5'), {
+          fallback: <Loading />
+        })
       }
     ]
   }

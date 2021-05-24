@@ -7,6 +7,9 @@ const HybirdHome: React.FC = observer((props) => {
 
   return (
     <>
+      {Array.from({ length: 10 ** 4 }).map(() => {
+        return <div key={Math.random()}>12313</div>
+      })}
       <div>Welcome Hybird Home</div>
       <div>current theme: {commonStore.theme}</div>
       <button type="button" onClick={() => commonStore.setTheme('black')}>
