@@ -1,16 +1,21 @@
 import { useStores } from '@/hooks'
 import { observer } from 'mobx-react'
 import React from 'react'
+import { Button } from 'antd'
+import { history } from '@/routes'
 
-const HybirdHome: React.FC = observer((props) => {
+const HybridHome: React.FC = observer((props) => {
   const commonStore = useStores('commonStore')
 
   return (
     <>
-      {Array.from({ length: 10 ** 4 }).map(() => {
+      <Button onClick={() => history.push('/')}>返回首页</Button>
+      <Button onClick={() => history.push('/h5/aa')}>去h5</Button>
+      {/* 耗时操作 */}
+      {Array.from({ length: 10 ** 5 }).map(() => {
         return <div key={Math.random()}>12313</div>
       })}
-      <div>Welcome Hybird Home</div>
+      <div>Welcome Hybrid Home</div>
       <div>current theme: {commonStore.theme}</div>
       <button type="button" onClick={() => commonStore.setTheme('black')}>
         set theme to black
@@ -22,4 +27,4 @@ const HybirdHome: React.FC = observer((props) => {
   )
 })
 
-export default HybirdHome
+export default HybridHome

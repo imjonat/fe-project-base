@@ -1,59 +1,74 @@
 import loadable from '@loadable/component'
 import Layout, { H5Layout } from '@/layouts'
 import { RouteConfig } from 'react-router-config'
-import Home from '@/pages/home'
 import React from 'react'
 import styled from 'styled-components'
+import { Spin } from 'antd'
+import { createBrowserHistory } from 'history'
+
+export const history = createBrowserHistory()
 
 const StyledCenter = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
+  z-index: 1000;
   left: 0;
   top: 0;
   display: grid;
   place-items: center;
 `
+
 export const Loading = () => {
-  return <StyledCenter>loading</StyledCenter>
+  return (
+    <StyledCenter>
+      <Spin size="large" />
+    </StyledCenter>
+  )
+}
+
+const loadableWithFallback = (loadFn: any, fallback = <Loading />) => {
+  return loadable(loadFn, { fallback })
+}
+
+const Page404Router = {
+  component: loadableWithFallback(() => import('@/pages/404'))
 }
 
 const routesConfig: RouteConfig[] = [
   {
     path: '/',
     exact: true,
-    component: Home
+    component: loadableWithFallback(() => import('@/pages/home'))
   },
   // APP 路由
   {
-    path: '/hybird',
-    exact: true,
     component: Layout,
+    path: '/hybrid',
     routes: [
       {
-        path: '/aaa',
-        exact: false,
-        component: loadable(() => import('@/pages/hybird'), {
-          fallback: <Loading />
-        })
-      }
+        path: '/hybrid/aa',
+        exact: true,
+        component: loadableWithFallback(() => import('@/pages/hybrid')),
+        visible: () => false
+      },
+      Page404Router
     ]
   },
   // H5 相关路由
   {
-    path: '/h5',
-    exact: false,
     component: H5Layout,
+    path: '/h5',
     routes: [
       {
-        path: '/',
-        exact: false,
-        component: loadable(() => import('@/pages/h5'), {
-          fallback: <Loading />
-        })
-      }
+        path: '/h5/aa',
+        exact: true,
+        component: loadableWithFallback(() => import('@/pages/h5'))
+      },
+      Page404Router
     ]
-  }
+  },
+  Page404Router
 ]
 
 export default routesConfig

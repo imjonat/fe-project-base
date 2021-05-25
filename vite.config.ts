@@ -28,6 +28,10 @@ const config: UserConfigExport = {
           libName: 'antd-mobile',
           style: (name) => `antd-mobile/es/${name}/style`,
           libDirectory: 'es'
+        },
+        {
+          libName: 'antd',
+          style: (name) => `antd/lib/${name}/style/index.less`
         }
       ]
     })
@@ -37,6 +41,10 @@ const config: UserConfigExport = {
       {
         find: /@\//,
         replacement: path.join(__dirname, './src/')
+      },
+      {
+        find: /~\//,
+        replacement: path.join(__dirname, './')
       }
     ]
     // 以下配置，在 window 电脑跑不起来
@@ -98,7 +106,7 @@ export default ({ command, mode }: ConfigEnv) => {
   const isBuild = command === 'build'
   // const base = isBuild ? process.env.VITE_STATIC_CDN : '//localhost:3000/'
 
-  config.base = process.env.VITE_STATIC_CDN
+  config.base = process.env.VITE_STATIC_CDN || './'
 
   if (isBuild) {
     // 压缩 Html 插件
@@ -125,7 +133,7 @@ export default ({ command, mode }: ConfigEnv) => {
     config.server = {
       // 反向代理
       proxy: {
-        api: {
+        '/api': {
           target: process.env.VITE_API_HOST,
           changeOrigin: true,
           rewrite: (path: any) => path.replace(/^\/api/, '')

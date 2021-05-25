@@ -23,7 +23,8 @@ import { RouteConfigComponentProps, renderRoutes } from 'react-router-config'
 const Layout: React.FC<RouteConfigComponentProps> = React.memo(function Layout(props) {
   // const history = useHistory()
   const { route } = props
-  console.log('hybird layout')
+  console.log('Hybrid layout', 'route?.routes', route?.routes)
+
   return (
     <div
       style={{
@@ -36,7 +37,7 @@ const Layout: React.FC<RouteConfigComponentProps> = React.memo(function Layout(p
           background: 'gray'
         }}
       >
-        hybird-header
+        Hybrid-header
       </div>
       <div
         style={{
