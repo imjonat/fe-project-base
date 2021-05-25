@@ -5,3 +5,5 @@ dist-ssr
 *.local
 stats.html
 .eslintcache
+.idea/
+.vscode
