@@ -3,6 +3,7 @@
  */
 
 import React from 'react'
+import img from '@/assets/404.svg'
 
 export default class Page404 extends React.Component {
   render() {
@@ -15,7 +16,7 @@ export default class Page404 extends React.Component {
           alignItems: 'center'
         }}>
         <div>
-          <img src={require('@/assets/images/404.svg')} />
+          <img src={img} />
         </div>
         <div>
           页面不存在，返回 <a href='/'>首页</a> 。
