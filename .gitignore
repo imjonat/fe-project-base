@@ -7,3 +7,4 @@ stats.html
 .eslintcache
 .idea/
 .vscode
+*.log
